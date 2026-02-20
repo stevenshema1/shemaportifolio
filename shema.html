@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shema | Web & Graphic Designer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00eaff;
+            --secondary: #7c3aed;
+            --accent: #ff3366;
+            --dark: #0f172a;
+            --darker: #020617;
+            --glass: rgba(15, 23, 42, 0.55);
+            --light: #e2e8f0;
+            --gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            perspective: 1300px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 0.9rem 5%;
+            box-shadow: 0 10px 30px rgba(0, 234, 255, 0.08);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.8rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--primary); }
+
+        /* Hero - More space for profile pic */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 5% 80px; /* Extra top padding to clear header */
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(0,234,255,0.08), transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .profile-container {
+            margin: 0 auto 2.5rem;
+            width: 260px;
+            height: 260px;
+            perspective: 1200px;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(0, 234, 255, 0.25);
+            box-shadow: 0 0 60px rgba(0, 234, 255, 0.3), inset 0 0 20px rgba(255,255,255,0.1);
+            transform: translateZ(80px) rotateX(8deg);
+            transition: all 0.7s ease;
+        }
+
+        .profile-pic:hover {
+            transform: translateZ(160px) rotateX(18deg) scale(1.1);
+            box-shadow: 0 0 120px rgba(0, 234, 255, 0.6);
+        }
+
+        .hero h1 {
+            font-size: 4.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 4s infinite alternate;
+        }
+
+        @keyframes glow { from { text-shadow: 0 0 15px rgba(0,234,255,0.6); } to { text-shadow: 0 0 40px rgba(0,234,255,1); } }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 15px 40px rgba(0, 234, 255, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 25px 60px rgba(0, 234, 255, 0.5);
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 234, 255, 0.18);
+            border-radius: 24px;
+            padding: 2.8rem;
+            transition: all 0.6s ease;
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .card:hover {
+            transform: translateY(-20px) rotateX(10deg) rotateY(10deg);
+            box-shadow: 0 40px 80px rgba(0, 234, 255, 0.3);
+            border-color: var(--primary);
+        }
+
+        .card i { font-size: 3.8rem; color: var(--primary); margin-bottom: 1.5rem; }
+
+        .card h3 { font-size: 2rem; margin-bottom: 1rem; color: white; }
+
+        /* Experience Timeline */
+        .experience {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .exp-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 60px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .exp-item.visible { opacity: 1; transform: translateY(0); }
+
+        .exp-content {
+            width: 45%;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 234, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .exp-content.left { margin-right: auto; }
+        .exp-content.right { margin-left: auto; }
+
+        .exp-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+        }
+
+        .exp-content.left::before {
+            right: -24px;
+            border-left-color: rgba(0, 234, 255, 0.3);
+        }
+
+        .exp-content.right::before {
+            left: -24px;
+            border-right-color: rgba(0, 234, 255, 0.3);
+        }
+
+        .exp-content h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 0.5rem; }
+
+        .exp-content p { color: var(--gray); }
+
+        /* Contact & Footer */
+        .contact-info { text-align: center; font-size: 1.4rem; }
+        .contact-info p { margin: 1.5rem 0; }
+        .contact-info a { color: var(--primary); text-decoration: none; transition: 0.3s; }
+        .contact-info a:hover { color: var(--secondary); }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: var(--dark);
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 160px; }
+            .hero h1 { font-size: 3.5rem; }
+            .nav-links { gap: 1.5rem; font-size: 0.95rem; }
+            .experience::before { left: 30px; }
+            .exp-item { flex-direction: column; }
+            .exp-content { width: 100%; margin: 2rem 0 !important; }
+            .exp-content.left::before, .exp-content.right::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <nav>
+            <a href="#home" class="logo">Shema</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="profile-container">
+                <img src="me in suite (1).png" alt="Shema - Professional Designer" class="profile-pic">
+            </div>
+            <h1>Shema</h1>
+            <h2>Web Developer & Graphic Designer</h2>
+            <p style="font-size: 1.4rem; max-width: 720px; margin: 0 auto 2.5rem; color: var(--gray);">
+                Building modern websites and powerful brand identities — turning ideas into digital experiences that perform.
+            </p>
+            <a href="#contact" class="cta-btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>My Services</h2>
+        <div class="services-grid">
+            <div class="card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Web Design & Development</h3>
+                <p>Custom responsive websites, WordPress solutions, landing pages, e-commerce, and full-stack development with clean code & SEO best practices.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Graphic Design</h3>
+                <p>Logos, branding packages, social media visuals, UI/UX elements, banners, illustrations — crafted with precision in Photoshop, Illustrator & Figma.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Work Experience</h2>
+        <div class="experience">
+            <div class="exp-item">
+                <div class="exp-content left">
+                    <h3>Web Developer</h3>
+                    <p>TA Luxury Safaris</p>
+                    <p style="font-size: 0.95rem; color: var(--gray);">Developed and maintained responsive tourism website with booking features and modern UI.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-content right">
+                    <h3>Web Developer</h3>
+                    <p>Rwanda Bus Booking System</p>
+                    <p style="font-size: 0.95rem; color: var(--gray);">Built full bus reservation platform including user authentication, payment integration, and admin dashboard.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-content left">
+                    <h3>Web Developer</h3>
+                    <p>Rilima HR Software</p>
+                    <p style="font-size: 0.95rem; color: var(--gray);">Created HR management system with employee tracking, payroll features, and intuitive interface.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p style="max-width: 900px; margin: 0 auto; text-align: center; font-size: 1.3rem; color: var(--gray);">
+            I'm Shema, a passionate web developer and graphic designer based in Kigali, Rwanda. 
+            I specialize in creating high-performance websites and compelling visual identities. 
+            Currently pursuing a Bachelor's Honor in Information Technology, I bring fresh ideas combined with real-world experience from projects like TA Luxury Safaris, Rwanda Bus Booking System, and Rilima HR Software.
+        </p>
+    </section>
+
+    <section id="contact">
+        <h2>Let's Connect</h2>
+        <div class="contact-info">
+            <p><i class="fas fa-phone" style="margin-right: 12px;"></i> +250 727 463 894</p>
+            <p><i class="fas fa-envelope" style="margin-right: 12px;"></i> <a href="mailto:andreshema218@gmail.com">andreshema218@gmail.com</a></p>
+            <p><i class="fab fa-github" style="margin-right: 12px;"></i> <a href="https://github.com/stevenshema1" target="_blank">github.com/stevenshema1</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Shema — Kigali, Rwanda | Built with creativity & code</p>
+    </footer>
+
+    <script>
+        // Smooth scroll & active link
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                anchor.classList.add('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Fade-in on scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.classList.contains('exp-item') || entry.target.classList.contains('card')) {
+                        entry.target.style.transitionDelay = '0.2s';
+                    }
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.card, .exp-item').forEach(el => observer.observe(el));
+
+        // Set home active initially
+        document.querySelector('.nav-links a[href="#home"]').classList.add('active');
+    </script>
+</body>
+</html>
